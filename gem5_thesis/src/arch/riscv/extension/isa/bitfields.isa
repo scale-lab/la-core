@@ -1,0 +1,69 @@
+// -*- mode:c++ -*-
+
+// Copyright (c) 2017 Brown University
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met: redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer;
+// redistributions in binary form must reproduce the above copyright
+// notice, this list of conditions and the following disclaimer in the
+// documentation and/or other materials provided with the distribution;
+// neither the name of the copyright holders nor the names of its
+// contributors may be used to endorse or promote products derived from
+// this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTOR
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+// Authors: Samuel Steffl
+
+//=============================================================================
+// RISC-V ISA Extension for the LACore CPU
+//=============================================================================
+
+//NOTE: i don't even think i'm using these for anything...
+
+def bitfield LOP            <8:7>;
+def bitfield LFUNC3         <11:9>;
+def bitfield LFUNC2         <16:15>;
+
+def bitfield LRXC           <21:17>;
+def bitfield LRXB           <26:22>;
+def bitfield LRXA           <31:27>;
+def bitfield LRFA           <31:27>;
+
+def bitfield LRD            <14:12>;
+def bitfield LRDLOC         <16:15>;
+def bitfield LRC            <20:18>;
+def bitfield LRB            <23:21>;
+def bitfield LRA            <26:24>;
+
+def bitfield LFUNC3_T2      <9>;
+def bitfield LFUNC3_SU      <10>;
+def bitfield LFUNC3_DV      <11>;
+def bitfield LFUNC3_ALT     <9>;
+def bitfield LFUNC3_VEC     <10>;
+def bitfield LFUNC3_DP      <11>;
+def bitfield LFUNC3_DAT     <9>;
+def bitfield LFUNC3_GET     <10>;
+def bitfield LFUNC3_CLR     <11>;
+
+def bitfield LFUNC2_RDCT    <16:15>;
+def bitfield LFUNC2_LRDLOC  <16:15>;
+def bitfield LFUNC2_TNS     <15>;
+def bitfield LFUNC2_SPV     <16>;
+
+def bitfield MST            <17>;
+
+def bitfield LZERO9         <23:15>;

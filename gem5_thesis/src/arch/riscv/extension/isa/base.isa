@@ -1,0 +1,147 @@
+// -*- mode:c++ -*-
+
+// Copyright (c) 2015 RISC-V Foundation
+// Copyright (c) 2016 The University of Virginia
+// Copyright (c) 2017 Brown University
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met: redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer;
+// redistributions in binary form must reproduce the above copyright
+// notice, this list of conditions and the following disclaimer in the
+// documentation and/or other materials provided with the distribution;
+// neither the name of the copyright holders nor the names of its
+// contributors may be used to endorse or promote products derived from
+// this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+// Authors: Maxwell Walter
+//          Alec Roelke
+//          Samuel Steffl
+
+
+//=============================================================================
+// RISC-V ISA Extension for the LACore CPU -- Base Instruction Class
+//=============================================================================
+
+//Outputs to decoder.hh
+output header {{
+    using namespace RiscvISA;
+
+    // Base class for all RISC-V LACore static instructions.
+    class RiscvLAInsn : public LAInsn
+    {
+      protected:
+        RiscvLAInsn(const char *mnem, MachInst _machInst, OpClass __opClass):
+            LAInsn(mnem, _machInst, __opClass), b(_machInst) {}
+        ~RiscvLAInsn() {}
+
+        std::string regName(RegIndex reg) const;
+
+        virtual std::string generateDisassembly(Addr pc, 
+            const SymbolTable *symtab) const = 0;
+
+        void advancePC(RiscvISA::PCState &pc) const override;
+
+        //======================================================================
+        uint32_t bits() { return b; }
+
+        //NON-overrides
+        bool isLAOpcode() const { return opcode() == 0x0b; }
+
+        uint32_t opcode() const { return x(0, 7); }
+        uint32_t lop()    const { return x(7, 2); }
+        uint32_t lfunc3() const { return x(9, 3); }
+        uint32_t lfunc2() const { return x(15, 2); }
+
+        uint32_t lzero9() const { return x(15, 9); }
+
+        //overrides
+        bool isLAData() const override { return isLAOpcode() &&
+                                         (lop() < 0x02); }
+        bool isLADataReduce()
+                        const override { return isLAOpcode() &&
+                                         (lop() == 0x00); }
+        bool isLACfg()  const override { return isLAOpcode() &&
+                                         (lop() == 0x02); }
+        bool isLAXfer() const override { return isLAOpcode() &&
+                                         (lop() == 0x03); }
+
+        RegIndex lrxc() const override { return (RegIndex)x(17, 5); }
+        RegIndex lrxb() const override { return (RegIndex)x(22, 5); }
+        RegIndex lrxa() const override { return (RegIndex)x(27, 5); }
+        RegIndex lrfa() const override { return (RegIndex)x(27, 5); }
+
+        RegIndex lrd()  const override { return (RegIndex)x(12, 3); }
+        RegIndex lrc()  const override { return (RegIndex)x(18, 3); }
+        RegIndex lrb()  const override { return (RegIndex)x(21, 3); }
+        RegIndex lra()  const override { return (RegIndex)x(24, 3); }
+
+        LALoc lrdloc()  const override { return (LALoc)(x(15, 2)); }
+        bool lrdHasMemRef()
+                        const override { return isLACfg() &&
+                                    ((lfunc3() == 0x0) || (lfunc3() == 0x3) ||
+                                     (lfunc3() == 0x4) || (lfunc3() == 0x7)); }
+
+        bool t2() const override {       return (bool)x(9,  1); }
+        bool su() const override {       return (bool)x(10, 1); }
+        bool dv() const override {       return (bool)x(11, 1); }
+        bool alt() const override {      return (bool)x(9,  1); }
+        bool vec() const override {      return (bool)x(10, 1); }
+        bool dp() const override {       return (bool)x(11, 1); }
+        bool dat() const override {      return (bool)x(9,  1); }
+        bool get() const override {      return (bool)x(10, 1); }
+        bool clr() const override {      return (bool)x(11, 1); }
+
+        LAReduce rdct() const override { return (LAReduce)(x(15, 2)); }
+        bool tns() const override {      return (bool)x(15, 1); }
+        bool spv() const override {      return (bool)x(16, 1); }
+
+        bool mst() const override {      return (bool)x(17, 1); }
+
+
+      private:
+        const uint32_t b;
+        uint32_t x(int lo, int len) const {
+            return (b >> lo) & ((uint32_t(1) << len)-1);
+        }
+        //======================================================================
+    };
+}};
+
+//Ouputs to decoder.cc
+output decoder {{
+    std::string
+    RiscvLAInsn::regName(RegIndex reg) const
+    {
+        if (reg < FP_Reg_Base) {
+            return std::string(IntRegNamesNumeric[reg]);
+        } 
+        else if(reg < CC_Reg_Base) {
+            return std::string(FloatRegNamesNumeric[reg - FP_Reg_Base]);
+        }
+        else {
+            assert(reg >= LA_Reg_Base && reg < LA_Csr_Reg_Base);
+            return std::string(LARegNamesNumeric[reg - LA_Reg_Base]);
+        }
+    }
+
+    void
+    RiscvLAInsn::advancePC(RiscvISA::PCState &pc) const
+    {
+        pc.advance();
+    }
+}};

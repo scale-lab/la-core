@@ -1,0 +1,24 @@
+Redirecting stdout to build/SPARC/tests/opt/quick/se/02.insttest/sparc/linux/o3-timing/simout
+Redirecting stderr to build/SPARC/tests/opt/quick/se/02.insttest/sparc/linux/o3-timing/simerr
+gem5 Simulator System.  http://gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 compiled Nov 29 2016 18:44:12
+gem5 started Nov 29 2016 18:44:33
+gem5 executing on zizzer, pid 58827
+command line: /z/powerjg/gem5-upstream/build/SPARC/gem5.opt -d build/SPARC/tests/opt/quick/se/02.insttest/sparc/linux/o3-timing -re /z/powerjg/gem5-upstream/tests/testing/../run.py quick/se/02.insttest/sparc/linux/o3-timing
+
+Global frequency set at 1000000000000 ticks per second
+info: Entering event queue @ 0.  Starting simulation...
+Begining test of difficult SPARC instructions...
+LDSTUB:		Passed
+SWAP:		Passed
+CAS FAIL:	Passed
+CAS WORK:	Passed
+CASX FAIL:	Passed
+CASX WORK:	Passed
+LDTX:		Passed
+LDTW:		Passed
+STTW:		Passed
+Done
+Exiting @ tick 29908500 because target called exit()

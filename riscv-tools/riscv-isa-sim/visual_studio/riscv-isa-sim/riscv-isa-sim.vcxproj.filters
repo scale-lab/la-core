@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\riscv">
+      <UniqueIdentifier>{65a1310d-0a8b-4428-bbe6-08564f942132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\la_core">
+      <UniqueIdentifier>{466b58f6-5595-4fb6-b2f0-0fedfd7cfd3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\riscv">
+      <UniqueIdentifier>{4d2f120b-b4d5-41af-a189-648cd971664d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\la_core">
+      <UniqueIdentifier>{566c50d5-bde7-40c0-907c-cef856676acd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\la_core\la_core.cc">
+      <Filter>Source Files\la_core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\la_core\la_mmu.cc">
+      <Filter>Source Files\la_core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\la_core\la_scratch.cc">
+      <Filter>Source Files\la_core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\riscv\cachesim.cc">
+      <Filter>Source Files\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\riscv\debug_module.cc">
+      <Filter>Source Files\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\riscv\devices.cc">
+      <Filter>Source Files\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\riscv\execute.cc">
+      <Filter>Source Files\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\riscv\extension.cc">
+      <Filter>Source Files\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\riscv\extensions.cc">
+      <Filter>Source Files\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\riscv\gdbserver.cc">
+      <Filter>Source Files\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\riscv\insn_template.cc">
+      <Filter>Source Files\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\riscv\interactive.cc">
+      <Filter>Source Files\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\riscv\mmu.cc">
+      <Filter>Source Files\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\riscv\processor.cc">
+      <Filter>Source Files\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\riscv\regnames.cc">
+      <Filter>Source Files\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\riscv\rocc.cc">
+      <Filter>Source Files\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\riscv\rom.cc">
+      <Filter>Source Files\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\riscv\rtc.cc">
+      <Filter>Source Files\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\riscv\sim.cc">
+      <Filter>Source Files\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\riscv\trap.cc">
+      <Filter>Source Files\riscv</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\la_core\la_insn.cc">
+      <Filter>Source Files\la_core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\la_core\la_core.h">
+      <Filter>Header Files\la_core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\la_core\la_insn.h">
+      <Filter>Header Files\la_core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\la_core\la_mmu.h">
+      <Filter>Header Files\la_core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\la_core\la_regnames.h">
+      <Filter>Header Files\la_core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\la_core\la_scratch.h">
+      <Filter>Header Files\la_core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\la_core\la_util.h">
+      <Filter>Header Files\la_core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\decode.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\extension.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\disasm.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\processor.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\cachesim.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\common.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\debug_module.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\devices.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\encoding.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\gdbserver.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\insn_template.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\memtracer.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\mmu.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\mulhi.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\rocc.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\sim.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\tracer.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\riscv\trap.h">
+      <Filter>Header Files\riscv</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\la_core\la_types.h">
+      <Filter>Header Files\la_core</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

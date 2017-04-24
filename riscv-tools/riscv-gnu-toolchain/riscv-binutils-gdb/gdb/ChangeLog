@@ -1,0 +1,96 @@
+2017-01-08  Iain Buclaw  <ibuclaw@gdcproject.org>
+
+	* d-exp.y (CastExpression): Emit UNOP_CAST_TYPE.
+
+2017-01-06  Yao Qi  <yao.qi@linaro.org>
+
+	* x86-linux-nat.h: Include gdb_proc_service.h.
+
+2017-01-06  Yao Qi  <yao.qi@linaro.org>
+
+	* ser-base.h: Include serial.h.
+
+2017-01-06  Yao Qi  <yao.qi@linaro.org>
+
+	* ppc-linux-tdep.h: Include ppc-tdep.h.
+
+2017-01-06  Yao Qi  <yao.qi@linaro.org>
+
+	* nat/amd64-linux-siginfo.h: Include signal.h.
+
+2017-01-06  Yao Qi  <yao.qi@linaro.org>
+
+	* nat/aarch64-linux-hw-point.h: Include break-common.h.
+
+2017-01-06  Yao Qi  <yao.qi@linaro.org>
+
+	* mi/mi-parse.h: Include mi-cmds.h.
+
+2017-01-06  Yao Qi  <yao.qi@linaro.org>
+
+	* inf-loop.c: Don't include "target.h".
+	* inf-loop.h: Include it here.
+
+2017-01-06  Yao Qi  <yao.qi@linaro.org>
+
+	* dfp.h: Include "dboulest.h" and "expression.h".
+
+2017-01-06  Yao Qi  <yao.qi@linaro.org>
+
+	* ax-gdb.h: Include "ax.h".
+
+2017-01-06  Yao Qi  <yao.qi@linaro.org>
+
+	* Makefile.in (HFILES_NO_SRCDIR): Replace gdb_ptrace.h
+	with nat/gdb_ptrace.h.
+
+2017-01-05  Yao Qi  <yao.qi@linaro.org>
+
+	* mips-fbsd-tdep.c (mips_fbsd_sigframe_init): Move && to
+	new line.
+	(mips64_fbsd_sigframe_init): Likewise.
+
+2017-01-04  John Baldwin  <jhb@FreeBSD.org>
+
+	* mips-fbsd-tdep.c (_initialize_mips_fbsd_tdep): Use
+	GDB_OSABI_FREEBSD instead of GDB_OSABI_FREEBSD_ELF.
+
+2017-01-04  John Baldwin  <jhb@FreeBSD.org>
+
+	* Makefile.in (ALLDEPFILES): Add mips-fbsd-nat.c.
+	* NEWS: Mention new FreeBSD/mips native configuration.
+	* config/mips/fbsd.mh: New file.
+	* configure.host: Add mips*-*-freebsd*.
+	* mips-fbsd-nat.c: New file.
+
+2017-01-04  John Baldwin  <jhb@FreeBSD.org>
+
+	* Makefile.in (ALL_TARGET_OBS): Add mips-fbsd-tdep.o.
+	(ALLDEPFILES): Add mips-fbsd-tdep.c.
+	* NEWS: Mention new FreeBSD/mips target.
+	* configure.tgt: Add mips*-*-freebsd*.
+	* mips-fbsd-tdep.c: New file.
+	* mips-fbsd-tdep.h: New file.
+
+2017-01-04  Yao Qi  <yao.qi@linaro.org>
+
+	* dwarf2loc.c (write_pieced_value): Don't use VALUE_FRAME_ID (to),
+	use c->frame_id when the piece location is DWARF_VALUE_REGISTER.
+
+2017-01-01  Joel Brobecker  <brobecker@adacore.com>
+
+        Update copyright year range in all GDB files.
+
+2017-01-01  Joel Brobecker  <brobecker@adacore.com>
+
+	* config/djgpp/fnchange.lst: Add entry for gdb/ChangeLog-2016.
+
+For older changes see ChangeLog-2016.
+
+Local Variables:
+mode: change-log
+left-margin: 8
+fill-column: 74
+version-control: never
+coding: utf-8
+End:

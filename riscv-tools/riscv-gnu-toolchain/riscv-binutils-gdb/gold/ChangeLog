@@ -1,0 +1,32 @@
+2017-01-09  Alan Modra  <amodra@gmail.com>
+
+	* powerpc.cc (Target_powerpc::make_plt_section): Point sh_info of
+	".rela.plt" at ".plt".
+
+2017-01-07  Alan Modra  <amodra@gmail.com>
+
+	* powerpc.cc: Use shorter equivalent elfcpp typedef for
+	Reltype and reloc_size throughout.
+	(Target_powerpc::symval_for_branch): Exclude dynamic symbols.
+	(Target_powerpc::Scan::local): Use local var r_sym.
+	(Target_powerpc::Scan::global: Likewise.
+	(Target_powerpc::Relocate::relocate): Delete shadowing r_sym.
+
+2017-01-02  Alan Modra  <amodra@gmail.com>
+
+	Update year range in copyright notice of all files.
+
+For older changes see ChangeLog-2016
+
+Copyright (C) 2017 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Local Variables:
+mode: change-log
+left-margin: 8
+fill-column: 74
+version-control: never
+End:

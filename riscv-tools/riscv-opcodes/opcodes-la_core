@@ -1,0 +1,104 @@
+#==============================================================================
+# DATA OPS
+#==============================================================================
+
+# scalar out, single stream
+@ldrmabn    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=0 11..9=0x0
+@ldrmabx    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=1 11..9=0x0
+@ldrmabs    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=2 11..9=0x0
+@ldrmatn    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=0 11..9=0x1
+@ldrmatx    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=1 11..9=0x1
+@ldrmats    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=2 11..9=0x1
+@ldrmsbn    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=0 11..9=0x2
+@ldrmsbx    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=1 11..9=0x2
+@ldrmsbs    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=2 11..9=0x2
+@ldrmstn    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=0 11..9=0x3
+@ldrmstx    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=1 11..9=0x3
+@ldrmsts    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=2 11..9=0x3
+@ldrdabn    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=0 11..9=0x4
+@ldrdabx    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=1 11..9=0x4
+@ldrdabs    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=2 11..9=0x4
+@ldrdatn    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=0 11..9=0x5
+@ldrdatx    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=1 11..9=0x5
+@ldrdats    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=2 11..9=0x5
+@ldrdsbn    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=0 11..9=0x6
+@ldrdsbx    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=1 11..9=0x6
+@ldrdsbs    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=2 11..9=0x6
+@ldrdstn    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=0 11..9=0x7
+@ldrdstx    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=1 11..9=0x7
+@ldrdsts    lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=0   16..15=2 11..9=0x7
+
+# scalar out, multi stream
+@ldrmmabn   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=0 11..9=0x0
+@ldrmmabx   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=1 11..9=0x0
+@ldrmmabs   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=2 11..9=0x0
+@ldrmmatn   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=0 11..9=0x1
+@ldrmmatx   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=1 11..9=0x1
+@ldrmmats   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=2 11..9=0x1
+@ldrmmsbn   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=0 11..9=0x2
+@ldrmmsbx   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=1 11..9=0x2
+@ldrmmsbs   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=2 11..9=0x2
+@ldrmmstn   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=0 11..9=0x3
+@ldrmmstx   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=1 11..9=0x3
+@ldrmmsts   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=2 11..9=0x3
+@ldrmdabn   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=0 11..9=0x4
+@ldrmdabx   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=1 11..9=0x4
+@ldrmdabs   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=2 11..9=0x4
+@ldrmdatn   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=0 11..9=0x5
+@ldrmdatx   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=1 11..9=0x5
+@ldrmdats   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=2 11..9=0x5
+@ldrmdsbn   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=0 11..9=0x6
+@ldrmdsbx   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=1 11..9=0x6
+@ldrmdsbs   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=2 11..9=0x6
+@ldrmdstn   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=0 11..9=0x7
+@ldrmdstx   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=1 11..9=0x7
+@ldrmdsts   lrd lra lrb lrc lrxa 6..0=0xb   8..7=0 17=1   16..15=2 11..9=0x7
+
+# vector out, single stream
+@ldvmab     lrd lra lrb lrc lrxa 6..0=0xb   8..7=1 17=0   16..15=0 11..9=0x0
+@ldvmat     lrd lra lrb lrc lrxa 6..0=0xb   8..7=1 17=0   16..15=0 11..9=0x1
+@ldvmsb     lrd lra lrb lrc lrxa 6..0=0xb   8..7=1 17=0   16..15=0 11..9=0x2
+@ldvmst     lrd lra lrb lrc lrxa 6..0=0xb   8..7=1 17=0   16..15=0 11..9=0x3
+@ldvdab     lrd lra lrb lrc lrxa 6..0=0xb   8..7=1 17=0   16..15=0 11..9=0x4
+@ldvdat     lrd lra lrb lrc lrxa 6..0=0xb   8..7=1 17=0   16..15=0 11..9=0x5
+@ldvdsb     lrd lra lrb lrc lrxa 6..0=0xb   8..7=1 17=0   16..15=0 11..9=0x6
+@ldvdst     lrd lra lrb lrc lrxa 6..0=0xb   8..7=1 17=0   16..15=0 11..9=0x7
+
+# vector out, multi-stream
+@ldvmmab    lrd lra lrb lrc lrxa 6..0=0xb   8..7=1 17=1   16..15=0 11..9=0x0
+@ldvmmat    lrd lra lrb lrc lrxa 6..0=0xb   8..7=1 17=1   16..15=0 11..9=0x1
+@ldvmmsb    lrd lra lrb lrc lrxa 6..0=0xb   8..7=1 17=1   16..15=0 11..9=0x2
+@ldvmmst    lrd lra lrb lrc lrxa 6..0=0xb   8..7=1 17=1   16..15=0 11..9=0x3
+@ldvmdab    lrd lra lrb lrc lrxa 6..0=0xb   8..7=1 17=1   16..15=0 11..9=0x4
+@ldvmdat    lrd lra lrb lrc lrxa 6..0=0xb   8..7=1 17=1   16..15=0 11..9=0x5
+@ldvmdsb    lrd lra lrb lrc lrxa 6..0=0xb   8..7=1 17=1   16..15=0 11..9=0x6
+@ldvmdst    lrd lra lrb lrc lrxa 6..0=0xb   8..7=1 17=1   16..15=0 11..9=0x7
+
+#==============================================================================
+# CFG OPS
+#==============================================================================
+
+#scalar addr
+@lcfgsxs    lrd lrxa  26..17=0    lrdloc     11..9=0  8..7=2 6..0=0xb
+@lcfgsxd    lrd lrxa  26..17=0    lrdloc     11..9=4  8..7=2 6..0=0xb
+
+#scalar value
+@lcfgsfs    lrd lrfa  26..17=0    16..15=0   11..9=1  8..7=2 6..0=0xb
+@lcfgsfd    lrd lrfa  26..17=0    16..15=0   11..9=5  8..7=2 6..0=0xb
+
+#vector/sparse addr 
+@lcfgvadrv  lrd lrxa  26..17=0    16..15=0   11..9=2  8..7=2 6..0=0xb
+@lcfgvadrs  lrd lrxa  lrxb lrxc   16..15=2   11..9=2  8..7=2 6..0=0xb
+@lcfgvadrt  lrd lrxa  lrxb lrxc   16..15=3   11..9=2  8..7=2 6..0=0xb
+
+#vector/sparse layout
+@lcfgvlays  lrd lrxa  lrxb lrxc   lrdloc     11..9=3  8..7=2 6..0=0xb
+@lcfgvlayd  lrd lrxa  lrxb lrxc   lrdloc     11..9=7  8..7=2 6..0=0xb
+
+#==============================================================================
+# XFER OPS
+#==============================================================================
+
+@lxferdata      lrd lra lrxa 8..7=3 6..0=0xb 11..9=1 23..15=0
+@lxfercsrget            lrxa 8..7=3 6..0=0xb 11..9=2 26..12=0
+@lxfercsrclear               8..7=3 6..0=0xb 11..9=4 31..12=0

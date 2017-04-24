@@ -1,0 +1,76 @@
+2017-01-09  Andrew Waterman <andrew@sifive.com>
+
+	* config/tc-riscv.c (append_insn): Don't eagerly apply relocations
+	against constants.
+	(md_apply_fix): Mark relocations against constants as "done."
+
+2017-01-09  Andrew Waterman <andrew@sifive.com>
+
+	* config/tc-riscv.c (append_insn): Don't eagerly apply relocations
+	against constants.
+	(md_apply_fix): Mark relocations against constants as "done."
+
+2017-01-09  Palmer Dabbelt <palmer@dabbelt.com>
+	    Kito Cheng <kito.cheng@gmail.com>
+
+	* emulparams/elf32lriscv-defs.sh (INITIAL_READONLY_SECTIONS):
+	Removed.
+	(SDATA_START_SYMBOLS): Likewise.
+
+2017-01-09  Nick Clifton  <nickc@redhat.com>
+
+	* po/sv.po: New Swedish translation.
+	* configure.ac (ALL_LINGUAS): Add sv.
+	* configure: Regenerate.
+
+2017-01-09  Andrew Waterman <andrew@sifive.com>
+
+	* config/tc-riscv.c (relaxed_branch_length): Use the long
+	sequence when the target is a weak symbol.
+
+2017-01-04  Szabolcs Nagy  <szabolcs.nagy@arm.com>
+
+	* config/tc-aarch64.c (aarch64_features): Add rcpc.
+	* doc/c-aarch64.texi (AArch64 Extensions): Document rcpc.
+	* testsuite/gas/aarch64/ldst-exclusive-armv8_3.d: Rename to ...
+	* testsuite/gas/aarch64/ldst-rcpc.d: This.
+	* testsuite/gas/aarch64/ldst-exclusive-armv8_3.s: Rename to ...
+	* testsuite/gas/aarch64/ldst-rcpc.s: This.
+	* testsuite/gas/aarch64/ldst-rcpc-armv8_2.d: New test.
+
+2017-01-04  Norm Jacobs  <norm.jacobs@oracle.com>
+
+	PR gas/20992
+	* configure.tgt: Treat sparcv9 as sparc64.
+
+2017-01-03  Kito Cheng  <kito.cheng@gmail.com>
+
+	* config/tc-riscv.c (riscv_set_arch): Whitelist the "q" ISA
+	extension.
+	(riscv_after_parse_args): Set FLOAT_ABI_QUAD when the Q ISA is
+	enabled and no other ABI is specified.
+
+2017-01-03  Dimitar Dimitrov  <dimitar@dinux.eu>
+
+	* config/tc-pru.c (md_number_to_chars): Fix parameter to be
+	valueT, as declared in tc.h.
+	(md_apply_fix): Fix to work on 32-bit hosts.
+
+2017-01-02  Alan Modra  <amodra@gmail.com>
+
+	Update year range in copyright notice of all files.
+
+For older changes see ChangeLog-2016
+
+Copyright (C) 2017 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Local Variables:
+mode: change-log
+left-margin: 8
+fill-column: 74
+version-control: never
+End:

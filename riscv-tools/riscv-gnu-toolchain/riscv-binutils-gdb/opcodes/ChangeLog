@@ -1,0 +1,76 @@
+2017-01-05  Nick Clifton  <nickc@redhat.com>
+
+	PR 20946
+	* frv-desc.c (lookup_mach_via_bfd_name): Return NULL if the name
+	could not be matched.
+	(frv_cgen_cpu_open): Allow for lookup_mach_via_bfd_name returning
+	NULL.
+
+2017-01-04  Szabolcs Nagy  <szabolcs.nagy@arm.com>
+
+	* aarch64-tbl.h (RCPC, RCPC_INSN): Define.
+	(aarch64_opcode_table): Use RCPC_INSN.
+
+2017-01-03  Kito Cheng  <kito.cheng@gmail.com>
+
+	* riscv-opc.c (riscv-opcodes): Add support for the "q" ISA
+	extension.
+	* riscv-opcodes/all-opcodes: Likewise.
+
+2017-01-03  Dilyan Palauzov  <dilyan.palauzov@aegee.org>
+
+	* riscv-dis.c (print_insn_args): Add fall through comment.
+
+2017-01-03  Nick Clifton  <nickc@redhat.com>
+
+	* po/sr.po: New Serbian translation.
+	* configure.ac (ALL_LINGUAS): Add sr.
+	* configure: Regenerate.
+
+2017-01-02  Alan Modra  <amodra@gmail.com>
+
+	* epiphany-desc.h: Regenerate.
+	* epiphany-opc.h: Regenerate.
+	* fr30-desc.h: Regenerate.
+	* fr30-opc.h: Regenerate.
+	* frv-desc.h: Regenerate.
+	* frv-opc.h: Regenerate.
+	* ip2k-desc.h: Regenerate.
+	* ip2k-opc.h: Regenerate.
+	* iq2000-desc.h: Regenerate.
+	* iq2000-opc.h: Regenerate.
+	* lm32-desc.h: Regenerate.
+	* lm32-opc.h: Regenerate.
+	* m32c-desc.h: Regenerate.
+	* m32c-opc.h: Regenerate.
+	* m32r-desc.h: Regenerate.
+	* m32r-opc.h: Regenerate.
+	* mep-desc.h: Regenerate.
+	* mep-opc.h: Regenerate.
+	* mt-desc.h: Regenerate.
+	* mt-opc.h: Regenerate.
+	* or1k-desc.h: Regenerate.
+	* or1k-opc.h: Regenerate.
+	* xc16x-desc.h: Regenerate.
+	* xc16x-opc.h: Regenerate.
+	* xstormy16-desc.h: Regenerate.
+	* xstormy16-opc.h: Regenerate.
+
+2017-01-02  Alan Modra  <amodra@gmail.com>
+
+	Update year range in copyright notice of all files.
+
+For older changes see ChangeLog-2016
+
+Copyright (C) 2017 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Local Variables:
+mode: change-log
+left-margin: 8
+fill-column: 74
+version-control: never
+End:

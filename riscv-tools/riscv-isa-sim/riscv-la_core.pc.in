@@ -1,0 +1,11 @@
+prefix=@prefix@
+exec_prefix=@prefix@
+libdir=${prefix}/@libdir@
+includedir=${prefix}/@includedir@
+
+Name: riscv-la_core
+Description: RISC-V LACore Coprocessor
+Version: git
+Libs: -Wl,-rpath,${libdir} -L${libdir} -lla_core
+Cflags: -I${includedir}
+URL: http://riscv.org/download.html#tab_spike

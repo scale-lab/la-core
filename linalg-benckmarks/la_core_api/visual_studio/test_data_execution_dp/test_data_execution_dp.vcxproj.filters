@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\la_core">
+      <UniqueIdentifier>{dc278cc0-f193-416c-9f57-47f2de7fb74f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\test\test_data_execution_dp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\la_core\la_copy.h">
+      <Filter>Header Files\la_core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\la_core\la_core.h">
+      <Filter>Header Files\la_core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\la_core\la_data_op.h">
+      <Filter>Header Files\la_core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\la_core\la_set_scalar.h">
+      <Filter>Header Files\la_core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\la_core\la_set_vec.h">
+      <Filter>Header Files\la_core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\test_util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

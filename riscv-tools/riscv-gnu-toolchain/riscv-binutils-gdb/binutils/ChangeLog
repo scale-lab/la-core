@@ -1,0 +1,41 @@
+2017-01-09  Nick Clifton  <nickc@redhat.com>
+
+	* objdump.c (display_file): Add new parameter 'last_file'.  If
+	last_file is true, do not call bfd_close at the end of the
+	function.
+	(main): Set the value of the last_file parameter when calling
+	display_file.
+
+2017-01-09  Alan Modra  <amodra@gmail.com>
+
+	* readelf.c (process_section_headers): Correct .rel.dyn/.rela.dyn
+	comment.
+
+2017-01-06  Nick Clifton  <nickc@redhat.com>
+
+	* MAINTAINERS: Move Paul Brook to the Past Maintainers section.
+
+2017-01-04  Dilan Palauzov  <dilyan.palauzov@aegee.org>
+
+	PR 20958
+	* syslex.l (option): Add noyywrap
+	(yywrap): Delete.
+
+2017-01-02  Alan Modra  <amodra@gmail.com>
+
+	Update year range in copyright notice of all files.
+
+For older changes see ChangeLog-2016
+
+Copyright (C) 2017 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Local Variables:
+mode: change-log
+left-margin: 8
+fill-column: 74
+version-control: never
+End:

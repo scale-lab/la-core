@@ -1,0 +1,20 @@
+la_core_subproject_deps = \
+	riscv \
+
+la_core_hdrs = \
+  la_types.h \
+  la_util.h \
+  la_insn.h \
+  la_scratch.h \
+  la_mmu.h \
+  la_core.h \
+
+la_core_srcs = \
+  la_mmu.cc \
+  la_scratch.cc \
+	la_core.cc \
+  la_insn.cc \
+
+la_core_test_srcs =
+
+la_core_install_prog_srcs = 

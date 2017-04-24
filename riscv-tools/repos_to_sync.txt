@@ -1,0 +1,14 @@
+./riscv-gnu-toolchain
+./riscv-gnu-toolchain/riscv-binutils-gdb
+./riscv-opcodes
+./riscv-isa-sim
+./riscv-tests
+./riscv-tests/riscv-test-env
+./riscv-pk
+./riscv-fesvr
+./
+
+##############################################################################
+# to get the current riscv-tools master:
+##############################################################################
+git submodule update --init --recursive

@@ -1,0 +1,231 @@
+// -*- mode:c++ -*-
+
+// Copyright (c) 2015 Riscv Developers
+// Copyright (c) 2016 The University of Virginia
+// Copyright (c) 2017 Brown University
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met: redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer;
+// redistributions in binary form must reproduce the above copyright
+// notice, this list of conditions and the following disclaimer in the
+// documentation and/or other materials provided with the distribution;
+// neither the name of the copyright holders nor the names of its
+// contributors may be used to endorse or promote products derived from
+// this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+// Authors: Samuel Steffl
+
+//=============================================================================
+// RISC-V ISA Extension for the LACore CPU -- Instruction Types
+//=============================================================================
+
+//Outputs to decoder.hh
+output header {{
+
+    class RiscvLACoreDataOp : public RiscvLAInsn
+    {
+      public: 
+        RiscvLACoreDataOp(const char *mnem, ExtMachInst _machInst,
+            OpClass __opClass) :
+            RiscvLAInsn(mnem, _machInst, __opClass)
+        {
+            //src/dst regs for scoreboard/dyn_inst functions
+            //NOTE: its impossible to tell what the la_regs are, so for the 
+            //      scoreboard, you need to only allow 1 LACore op in the 
+            //      pipeline at a time
+            //NOTE: we only track non-lacore registers here
+            _numSrcRegs = 1;
+            _numDestRegs = 0;
+            _srcRegIdx[0] = lrxa();
+        }
+
+        std::string generateDisassembly(Addr pc, 
+            const SymbolTable *symtab) const;
+    };
+
+    class RiscvLACoreCfgOp : public RiscvLAInsn
+    {
+      public: 
+        RiscvLACoreCfgOp(const char *mnem, ExtMachInst _machInst,
+            OpClass __opClass) :
+            RiscvLAInsn(mnem, _machInst, __opClass)
+        {
+            //src/dst regs for scoreboard/dyn_inst functions
+            //NOTE: its impossible to tell what the la_regs are, so for the 
+            //      scoreboard, you need to only allow 1 LACore op in the 
+            //      pipeline at a time
+            //NOTE: we only track non-lacore registers here
+            _numSrcRegs = ((vec() && alt()) || spv()) ? 3 : 1;
+            _numDestRegs = 0;
+
+            if(!vec() && alt()){
+                _srcRegIdx[0] = FP_Reg_Base + lrfa();
+            } else {
+                _srcRegIdx[0] = lrxa();
+            }
+            _srcRegIdx[1] = lrxb();
+            _srcRegIdx[2] = lrxc();
+        }
+
+        std::string generateDisassembly(Addr pc, 
+            const SymbolTable *symtab) const;
+    };
+
+    class RiscvLACoreXferOp : public RiscvLAInsn
+    {
+      public: 
+        RiscvLACoreXferOp(const char *mnem, ExtMachInst _machInst,
+            OpClass __opClass) :
+            RiscvLAInsn(mnem, _machInst, __opClass)
+        {
+            //src/dst regs for scoreboard/dyn_inst functions
+            //NOTE: its impossible to tell what the la_regs are, so for the 
+            //      scoreboard, you need to only allow 1 LACore op in the 
+            //      pipeline at a time
+            //NOTE: we only track non-lacore registers here
+            _numSrcRegs = (lfunc3() == 1) ? 1 : 0;
+            _numDestRegs = (lfunc3() == 2) ? 1 : 0;
+
+            _srcRegIdx[0] = lrxa();
+            _destRegIdx[0] = lrxa();
+        }
+
+        std::string generateDisassembly(Addr pc, 
+            const SymbolTable *symtab) const;
+    };
+
+}};
+
+//=============================================================================
+// Generate the dissassembly for debugging
+//=============================================================================
+
+//Ouputs to decoder.cc
+output decoder {{
+
+    std::string RiscvLACoreDataOp::generateDisassembly(Addr pc,
+        const SymbolTable *symtab) const
+    {
+        std::stringstream ss;
+        ss << csprintf("0x%08x", machInst) << " " << mnemonic << " ";
+
+        ss << LARegNamesNumeric[lrd()] << ", ";
+        ss << LARegNamesNumeric[lra()] << ", ";
+        ss << LARegNamesNumeric[lrb()] << ", ";
+        ss << LARegNamesNumeric[lrc()] << ", ";
+        ss << IntRegNamesNumeric[lrxa()];
+        return ss.str();
+    }
+
+    std::string RiscvLACoreCfgOp::generateDisassembly(Addr pc,
+        const SymbolTable *symtab) const
+    {
+        std::stringstream ss;
+        ss << csprintf("0x%08x", machInst) << ' ' << mnemonic << ' ';
+
+        std::string pre ("");
+        std::string post ("");
+        if(lrdHasMemRef()){
+          if(lrdloc() == LALoc::Mem) { pre = "("; post = ")"; }
+          if(lrdloc() == LALoc::Sch) { pre = "{"; post = "}"; }
+        }
+        ss << pre << LARegNamesNumeric[lrd()] << post << ", ";
+
+        if(!vec() && !alt()){
+            ss << IntRegNamesNumeric[lrxa()];
+        } else if(!vec() && alt()){
+            ss << FloatRegNamesNumeric[lrfa()];
+        } else {
+            ss << IntRegNamesNumeric[lrxa()];
+            if(spv() || alt()){
+                ss << ", " << IntRegNamesNumeric[lrxb()];
+                ss << ", " << IntRegNamesNumeric[lrxc()];
+            }
+        }
+        return ss.str();
+    }
+
+    std::string RiscvLACoreXferOp::generateDisassembly(Addr pc,
+        const SymbolTable *symtab) const
+    {
+        std::stringstream ss;
+        ss << csprintf("0x%08x", machInst) << ' ' << mnemonic << ' ';
+
+        if (lfunc3() == 1) {
+            ss << LARegNamesNumeric[lrd()] << ", ";
+            ss << LARegNamesNumeric[lra()] << ", ";
+            ss << IntRegNamesNumeric[lrxa()];
+        } else if(lfunc3() == 2) {
+            ss << IntRegNamesNumeric[lrxa()];
+        }
+        return ss.str();
+    }
+}};
+
+//=============================================================================
+// Custom code blocks since basic.isa will NOT work
+//=============================================================================
+
+// Basic instruction class constructor template.
+def template LACoreConstructor {{
+    %(class_name)s::%(class_name)s(MachInst machInst)
+        : %(base_class)s("%(mnemonic)s", machInst, LACoreOp)
+    {
+        //Do Nothing here! we manually will set _srcReg and _destReg stuff
+    }
+}};
+
+
+// Basic instruction class execute method template.
+def template LACoreExecute {{
+    Fault
+    %(class_name)s::execute(CPU_EXEC_CONTEXT *xc,
+        Trace::InstRecord *traceData) const
+    {
+        panic("LACore insn had it's execute() called!");
+        return NoFault;
+    }
+}};
+
+//=============================================================================
+// Generate the Code Blocks from templates/decoder
+//=============================================================================
+
+def format LACoreDataOp() {{
+    iop = InstObjParams(name, Name, 'RiscvLACoreDataOp', '')
+    header_output = BasicDeclare.subst(iop)
+    decoder_output = LACoreConstructor.subst(iop)
+    decode_block = BasicDecode.subst(iop)
+    exec_output = LACoreExecute.subst(iop)
+}};
+
+def format LACoreCfgOp() {{
+    iop = InstObjParams(name, Name, 'RiscvLACoreCfgOp')
+    header_output = BasicDeclare.subst(iop)
+    decoder_output = LACoreConstructor.subst(iop)
+    decode_block = BasicDecode.subst(iop)
+    exec_output = LACoreExecute.subst(iop)
+}};
+
+def format LACoreXferOp() {{
+    iop = InstObjParams(name, Name, 'RiscvLACoreXferOp')
+    header_output = BasicDeclare.subst(iop)
+    decoder_output = LACoreConstructor.subst(iop)
+    decode_block = BasicDecode.subst(iop)
+    exec_output = LACoreExecute.subst(iop)
+}};

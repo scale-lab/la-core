@@ -1,0 +1,44 @@
+#/usr/bin/env bash
+
+export RISCV=`pwd`/..
+
+export MAKEFLAGS="-j9"
+
+if [ "x$RISCV" = "x" ]
+then
+  echo "Please set the RISCV environment variable to your preferred install path."
+  exit 1
+fi
+
+# Use gmake instead of make if it exists.
+MAKE=`command -v gmake || command -v make`
+
+PATH="$RISCV/bin:$PATH"
+#GCC_VERSION=`gcc -v 2>&1 | tail -1 | awk '{print $3}'`
+
+set -e
+
+function build_project {
+  PROJECT="$1"
+  shift
+  echo
+  if [ -e "$PROJECT/build" ]
+  then
+    echo "Removing existing $PROJECT/build directory"
+    rm -rf "$PROJECT/build"
+  fi
+  mkdir -p "$PROJECT/build"
+  cd "$PROJECT/build"
+  echo "Configuring project $PROJECT"
+  ../configure $* > build.log
+  echo "Building project $PROJECT"
+  $MAKE >> build.log
+  echo "Installing project $PROJECT"
+  $MAKE install >> build.log
+  cd - > /dev/null
+}
+
+echo "Starting RISC-V Toolchain build process"
+
+#build_project riscv-gnu-toolchain --prefix=$RISCV
+build_project '.' --prefix=$RISCV --target=riscv64-elf

@@ -1,0 +1,13 @@
+Redirecting stdout to build/SPARC/tests/opt/quick/se/00.hello/sparc/linux/simple-timing-ruby/simout
+Redirecting stderr to build/SPARC/tests/opt/quick/se/00.hello/sparc/linux/simple-timing-ruby/simerr
+gem5 Simulator System.  http://gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 compiled Oct 13 2016 20:43:27
+gem5 started Oct 13 2016 20:46:33
+gem5 executing on e108600-lin, pid 17405
+command line: /work/curdun01/gem5-external.hg/build/SPARC/gem5.opt -d build/SPARC/tests/opt/quick/se/00.hello/sparc/linux/simple-timing-ruby -re /work/curdun01/gem5-external.hg/tests/testing/../run.py quick/se/00.hello/sparc/linux/simple-timing-ruby
+
+Global frequency set at 1000000000 ticks per second
+info: Entering event queue @ 0.  Starting simulation...
+Hello World!Exiting @ tick 86746 because target called exit()

@@ -1,0 +1,67 @@
+
+the rest of the code outside the arch/ can just include files called:
+  "arch/registers.hh" and "arch/types.hh", which are generated during compile
+  to just have " #include arch/<arch>/register.hh" 
+
+
+
+decoder.hh
+
+  ! all the below is in the decoder.hh file, and the associated .hh.inc files
+
+  #include decoder-g.hh.inc
+
+    ! the following is in decoder-g.hh.inc
+      
+      #include base/bitfields.hh
+
+      the "output header {{ ... }}" block in the includes.isa file!
+
+  namespace RiscvISAInst {
+    #include decoder-ns.hh.inc
+
+     ! the following is in decoder-ns.hh.inc
+
+        ! the following is the converted bitfields.isa
+        
+          #define OPCODE bits(machInst 6 0)
+          ...
+
+        ! the following is from base.isa and other "decoder {{ }} blocks" 
+
+          the "output decoder {{ }}" blocks
+
+          using namespace RiscvISA
+
+          cass RiscvStaticInst : public StaticInst
+          ...
+
+          class IOp : public RiscvStaticInst
+          ...
+
+
+  }
+
+
+
+-------------------------------------------------------------------------------
+
+! the full decoder is in he decoder.cc file
+
+
+decoder.cc
+
+  #include decoder-g.cc.inc
+
+  #include deocde-method.cc.inc
+
+    ! this is generated straight from the huge decode.isa file
+
+-------------------------------------------------------------------------------
+
+
+  the "output exec {{ }} blocks go in the global namespace for exec-g.cc.inc
+
+  exec-ns-cc.inc is all the implementations of the classes (15000 lines)
+
+  the 
