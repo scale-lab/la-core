@@ -7,6 +7,8 @@ LACore source is organized into the following:
 - __riscv-tools__: The complete RISC-V toolchain modified for the LACore. Only a handful of the sub-repositories have been modified
 - __sched-framework__: Task scheduling framework for multicore LACore architectures. This is work-in-progress at the moment.
 
+The remainder of this file is an installation guide. For the software developer docs (if you want to write C-programs targeting the LACore), read the [LACoreAPI Developer Docs](LACoreAPI-Docs.md)
+
 # Installing
 This guide has been verified on ubuntu 14.04 only. Feel free to pioneer other platforms.
 
