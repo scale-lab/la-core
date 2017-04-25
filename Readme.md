@@ -225,6 +225,6 @@ In order to extend the ISA, you need to modify the `riscv-opcodes` sub-directory
     
 After you make the changes you want, change directories up to the `riscv-tools` repository and run
 
-    ./build-binutils/gdb
+    ./build-binutils-gdb
     
 This will rebuild the gcc toolchain (with your additions to gas), and update the binaries in `$RISCV/bin`. Now, you are __STRONGLY__ advised to rebuild and rerun the LACoreAPI regression tests in spike to make sure the assembler isn't broken!
