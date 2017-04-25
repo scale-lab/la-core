@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\sched">
+      <UniqueIdentifier>{e66fb8b2-a04c-4889-b6a0-b08a45bb3f48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\util">
+      <UniqueIdentifier>{d3e12bd2-a495-4d17-b6d3-7b9c794984ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\debug">
+      <UniqueIdentifier>{9ec8a211-189b-4e0f-b678-83d4eaa52c83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\synch">
+      <UniqueIdentifier>{c34bc3e5-580b-484e-96a7-20ddf9e6afa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sched">
+      <UniqueIdentifier>{fc48a3a8-4500-43a7-ad1a-ac0975ec0748}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\util">
+      <UniqueIdentifier>{129acfa9-3ff3-472f-8845-648737f59e60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\test">
+      <UniqueIdentifier>{7c025fc9-8fc5-4a1e-a1e3-7c75c16d286b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\sched\framework.c">
+      <Filter>Source Files\sched</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\sched\group.c">
+      <Filter>Source Files\sched</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\sched\syscall.c">
+      <Filter>Source Files\sched</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\sched\task.c">
+      <Filter>Source Files\sched</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\test\test_synch_1_group_1_cpu_1_task.c">
+      <Filter>Source Files\test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\util\dbg.c">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\util\htable.c">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\debug\colordefs.h">
+      <Filter>Header Files\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\debug\dbg.h">
+      <Filter>Header Files\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\debug\dbg_modes.h">
+      <Filter>Header Files\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\synch\cond.h">
+      <Filter>Header Files\synch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\synch\mutex.h">
+      <Filter>Header Files\synch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\synch\spinlock.h">
+      <Filter>Header Files\synch</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\sched\framework.h">
+      <Filter>Header Files\sched</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\sched\group.h">
+      <Filter>Header Files\sched</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\sched\syscall.h">
+      <Filter>Header Files\sched</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\sched\task.h">
+      <Filter>Header Files\sched</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\util\htable.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\util\list.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\util\util.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
