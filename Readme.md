@@ -23,7 +23,10 @@ First, put the following in your `.bashrc` file:
 Then, install the ubuntu packages from the [riscv-tools](https://github.com/riscv/riscv-tools) guide, which at the time of this writing were:
 
     sudo apt-get install autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev
+    
+Additionally, I ran into some issues and had to install the following packages:
 
+    sudo apt-get install expat python babeltrace gettext
 
 Then, `cd` into the riscv-tools directory and run the following build scripts:
 
@@ -37,6 +40,7 @@ To make sure the RISC-V compiler with the LACore extension is working correctly,
 
 First, change directories into `linalg-benchmarks/la_core_api`. Then run the following command:
 
+    mkdir out
     make test_api \
          test_data_movement_dp \
          test_data_execution_dp \
@@ -58,7 +62,13 @@ The `SCRATCH_SIZE=16` is a bad hack to pass parameters to the LACore extension w
 
 ## cross-compiling GSL for RISC-V
 
-The next step is cross-compiling GNU Scientific Library for RISC-V. We need GSL in order to run the HPCC benchmarks on the RISC-V platform, since we use GSL to verify the correctness of the LACore results. First, download [GSL sources](https://www.gnu.org/software/gsl/). Then run the following:
+The next step is cross-compiling GNU Scientific Library for RISC-V. We need GSL in order to run the HPCC benchmarks on the RISC-V platform, since we use GSL to verify the correctness of the LACore results. First, download [GSL sources](https://www.gnu.org/software/gsl/). For example, this might work for you:
+
+    cd ~
+    wget http://mirrors.syringanetworks.net/gnu/gsl/gsl-latest.tar.gz
+    tar xzf gsl-latest.tar.gz
+
+Then `cd` into the gsl directory and run the following:
 
     ./configure --host=riscv64-unknown-elf --prefix=$RISCV
     make
@@ -70,6 +80,7 @@ You should now have `libgsl.a` and `libgslcblas.a` in `$RISCV/lib`. Now we can l
 
 Now we will cross-compile the modified HPCC benchmarks for the LACore to be run on the spike simulator. We will worry about gem5 after we can get the functional simulation of the benchmarks to pass. First change directories into `linalg-benchmarks/benchmarks`. Then run the following:
 
+    mkdir out
     make dgemm_la_core_sweep \
      dstream_la_core_sweep \
      dfft_la_core_sweep \
