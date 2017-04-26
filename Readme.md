@@ -10,7 +10,7 @@ LACore source is organized into the following:
 The remainder of this file is an installation guide. For the software developer docs (if you want to write C-programs targeting the LACore), read the [LACoreAPI Developer Docs](LACoreAPI-Docs.md)
 
 # Installing
-This guide has been verified on ubuntu 14.04 only. Feel free to pioneer other platforms.
+This guide has been verified on ubuntu 16.04 with gcc 4.9.3 only. Feel free to pioneer other platforms.
 
 ## Installing riscv-tools
 First, you should read through and understand the installation guide for the [riscv-tools meta-repository](https://github.com/riscv/riscv-tools). You will __NOT__ be following it exactly, since the submodules have been merged into this repository.
