@@ -535,7 +535,7 @@ void left_upper_fast(double *A, double *B, IDX *pvec, IDX M, double alpha)
     la_set_vec_dp_sch(X_sch_REG,   X_SCH_ADR+DPSIZE*(M-1), -1, kcount, 0);
     la_AmulBaddC_sum(tmp_REG, X_sch_REG, Ajm_mem_REG, Zero_REG, kcount);
 
-    la_set_scalar_dp_sch(X_sch_REG, X_adr);
+    la_set_vec_adr_dp_sch(X_sch_REG, X_adr);
     la_set_scalar_dp_sch(B_sch_REG, B_adr);
     la_set_scalar_dp_mem(Ajj_mem_REG, Ajj);
     la_AsubBdivC(X_sch_REG, B_sch_REG, tmp_REG, Ajj_mem_REG, 1);
