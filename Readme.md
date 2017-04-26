@@ -89,7 +89,7 @@ Now we will cross-compile the modified HPCC benchmarks for the LACore to be run 
        ptrans_la_core_sweep \
      dtrsm_la_core_sweep 
        
-This will build the 6 modified HPCC benchmarks (and DTRSM, a BLAS-3 routine) and put the output binaries in the `out` folder. Each of the 7 benchmarks takes slightly different parameters and you should just look at the `main()` function for each of them to figure out whats going on. Its not too complicated. For starters, here are simple command lines to run each of the benchmarks on the spike functional simulator using a 64 kB scratchpad and arbitrary workload sizes. __NOTE__: you can add a `--debug` flag to all the benchmarks for more verbose output if something seems wrong. __NOTE__: all matrix and vector data is randomly generated floating point numbers. The random number generator can use a different seed if you pass in `--seed=X`, where `X` is a positive integer.
+This will build the 6 modified HPCC benchmarks (and DTRSM, a BLAS-3 routine) and put the output binaries in the `out` folder. Each of the 7 benchmarks takes slightly different parameters and you should just look at the `main()` function for each of them to figure out whats going on. For starters, here are simple command lines to run each of the benchmarks on the spike functional simulator using a 64 kB scratchpad and arbitrary workload sizes. __NOTE__: you can add a `--debug` flag to all the benchmarks for more verbose output if something seems wrong. __NOTE__: all matrix and vector data is randomly generated floating point numbers. The random number generator can use a different seed if you pass in `--seed=X`, where `X` is a positive integer.
 
 The following will run DGEMM with 64x64 sized matrices, and a block size of 64x64 (you can change the block size if you want).
 
@@ -99,7 +99,7 @@ The following will run the STREAM benchmark with vector sizes of 2^12
     
     SCRATCH_SIZE=16 spike --extension=la_core pk out/dstream_la_core_sweep --size=12 --scratch_size=16
     
-The following will run the 1-D FFT benchmark with a vector size of 2^12
+The following will run the 1-D FFT benchmark with a vector size of 2^12. __NOTE__: FFT for the LACore was broken by some recent changes, and needs to be fixed, so the following command will fail!
     
     SCRATCH_SIZE=16 spike --extension=la_core pk out/dfft_la_core_sweep --log_size=12 --scratch_size=16
     
@@ -137,27 +137,31 @@ You'll most likely want to use the `MinorLACoreCPU` model. In order to run these
 - configs/la_core/full_timing_la_core.py
 - configs/la_core/minor_la_core.py
 
-To run the HPCC benchmarks and DTRSM on the pipelined LACore model in gem5, with the same workload arguments as above, use the following command lines:
+To run the HPCC benchmarks and DTRSM on the pipelined LACore model in gem5, with the same workload arguments as above, use the following command lines. __NOTE__: FFT for the LACore was broken by some recent changes, and needs to be fixed, so the following FFT command will fail!
 
-    /build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dgemm_la_core_sweep --size=64 --bs=64 --scratch_size=16"
+    ./build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dgemm_la_core_sweep --size=64 --bs=64 --scratch_size=16"
     
-    /build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dstream_la_core_sweep --size=12 --scratch_size=16"
+    ./build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dstream_la_core_sweep --size=12 --scratch_size=16"
     
-    /build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dfft_la_core_sweep --log_size=12 --scratch_size=16"
+    ./build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dfft_la_core_sweep --log_size=12 --scratch_size=16"
     
-    /build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/drandom_access_la_core_sweep --log_size=16"
+    ./build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/drandom_access_la_core_sweep --log_size=16"
     
-    /build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dlu_solve_la_core_sweep --log_size=6 --scratch_size=16"
+    ./build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dlu_solve_la_core_sweep --log_size=6 --scratch_size=16"
     
-    /build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/ptrans_la_core_sweep --log_size=6 --scratch_size=16"
+    ./build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/ptrans_la_core_sweep --log_size=6 --scratch_size=16"
     
-    /build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dtrsm_la_core_sweep --size=64 --scratch_size=16"
+    ./build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dtrsm_la_core_sweep --size=64 --scratch_size=16"
     
 If everything is passing, you have successfully installed the full LACore development environment, congratulations. You can now start writing your own benchmarks and programs and running them on spike and gem5 using the same workflow described here.
 
 # Building x86 HPCC benchmarks
 
-The HPCC benchmarks have also been written for the x86 superscalar platform. to build these, you need to install GSL and FFTW3 using `apt-get` or your package manager. Then, change directories into `linalg-benchmarks/benchmarks` and run the following command:
+The HPCC benchmarks have also been written for the x86 superscalar platform. to build these, you need to install GSL and FFTW3 using `apt-get` or your package manager:
+
+    sudo apt-get install libfftw3-dev libgsl-dev
+
+Then, change directories into `linalg-benchmarks/benchmarks` and run the following command:
 
     make dgemm_x86_sweep \
          dstream_x86_sweep \
