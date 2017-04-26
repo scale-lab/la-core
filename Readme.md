@@ -20,7 +20,10 @@ First, put the following in your `.bashrc` file:
     export RISCV=/path/to/install/riscv/toolchain
     export PATH=$PATH:$RISCV/bin
     
-Then, install the ubuntu packages from the [riscv-tools](https://github.com/riscv/riscv-tools) guide.
+Then, install the ubuntu packages from the [riscv-tools](https://github.com/riscv/riscv-tools) guide, which at the time of this writing were:
+
+    sudo apt-get install autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev
+
 
 Then, `cd` into the riscv-tools directory and run the following build scripts:
 
