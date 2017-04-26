@@ -10,7 +10,7 @@ LACore source is organized into the following:
 The remainder of this file is an installation guide. For the software developer docs (if you want to write C-programs targeting the LACore), read the [LACoreAPI Developer Docs](LACoreAPI-Docs.md)
 
 # Installing
-This guide has been verified on ubuntu 14.04 only. Feel free to pioneer other platforms.
+This guide has been verified on ubuntu 16.04 with gcc 4.9.3 only. Feel free to pioneer other platforms.
 
 ## Installing riscv-tools
 First, you should read through and understand the installation guide for the [riscv-tools meta-repository](https://github.com/riscv/riscv-tools). You will __NOT__ be following it exactly, since the submodules have been merged into this repository.
@@ -23,7 +23,10 @@ First, put the following in your `.bashrc` file:
 Then, install the ubuntu packages from the [riscv-tools](https://github.com/riscv/riscv-tools) guide, which at the time of this writing were:
 
     sudo apt-get install autoconf automake autotools-dev curl libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev
+    
+Additionally, I ran into some issues and had to install the following packages:
 
+    sudo apt-get install expat python babeltrace gettext
 
 Then, `cd` into the riscv-tools directory and run the following build scripts:
 
@@ -37,6 +40,7 @@ To make sure the RISC-V compiler with the LACore extension is working correctly,
 
 First, change directories into `linalg-benchmarks/la_core_api`. Then run the following command:
 
+    mkdir out
     make test_api \
          test_data_movement_dp \
          test_data_execution_dp \
@@ -58,7 +62,13 @@ The `SCRATCH_SIZE=16` is a bad hack to pass parameters to the LACore extension w
 
 ## cross-compiling GSL for RISC-V
 
-The next step is cross-compiling GNU Scientific Library for RISC-V. We need GSL in order to run the HPCC benchmarks on the RISC-V platform, since we use GSL to verify the correctness of the LACore results. First, download [GSL sources](https://www.gnu.org/software/gsl/). Then run the following:
+The next step is cross-compiling GNU Scientific Library for RISC-V. We need GSL in order to run the HPCC benchmarks on the RISC-V platform, since we use GSL to verify the correctness of the LACore results. First, download [GSL sources](https://www.gnu.org/software/gsl/). For example, this might work for you:
+
+    cd ~
+    wget http://mirrors.syringanetworks.net/gnu/gsl/gsl-latest.tar.gz
+    tar xzf gsl-latest.tar.gz
+
+Then `cd` into the gsl directory and run the following:
 
     ./configure --host=riscv64-unknown-elf --prefix=$RISCV
     make
@@ -70,6 +80,7 @@ You should now have `libgsl.a` and `libgslcblas.a` in `$RISCV/lib`. Now we can l
 
 Now we will cross-compile the modified HPCC benchmarks for the LACore to be run on the spike simulator. We will worry about gem5 after we can get the functional simulation of the benchmarks to pass. First change directories into `linalg-benchmarks/benchmarks`. Then run the following:
 
+    mkdir out
     make dgemm_la_core_sweep \
      dstream_la_core_sweep \
      dfft_la_core_sweep \
@@ -78,7 +89,7 @@ Now we will cross-compile the modified HPCC benchmarks for the LACore to be run 
        ptrans_la_core_sweep \
      dtrsm_la_core_sweep 
        
-This will build the 6 modified HPCC benchmarks (and DTRSM, a BLAS-3 routine) and put the output binaries in the `out` folder. Each of the 7 benchmarks takes slightly different parameters and you should just look at the `main()` function for each of them to figure out whats going on. Its not too complicated. For starters, here are simple command lines to run each of the benchmarks on the spike functional simulator using a 64 kB scratchpad and arbitrary workload sizes. __NOTE__: you can add a `--debug` flag to all the benchmarks for more verbose output if something seems wrong. __NOTE__: all matrix and vector data is randomly generated floating point numbers. The random number generator can use a different seed if you pass in `--seed=X`, where `X` is a positive integer.
+This will build the 6 modified HPCC benchmarks (and DTRSM, a BLAS-3 routine) and put the output binaries in the `out` folder. Each of the 7 benchmarks takes slightly different parameters and you should just look at the `main()` function for each of them to figure out whats going on. For starters, here are simple command lines to run each of the benchmarks on the spike functional simulator using a 64 kB scratchpad and arbitrary workload sizes. __NOTE__: you can add a `--debug` flag to all the benchmarks for more verbose output if something seems wrong. __NOTE__: all matrix and vector data is randomly generated floating point numbers. The random number generator can use a different seed if you pass in `--seed=X`, where `X` is a positive integer.
 
 The following will run DGEMM with 64x64 sized matrices, and a block size of 64x64 (you can change the block size if you want).
 
@@ -88,7 +99,7 @@ The following will run the STREAM benchmark with vector sizes of 2^12
     
     SCRATCH_SIZE=16 spike --extension=la_core pk out/dstream_la_core_sweep --size=12 --scratch_size=16
     
-The following will run the 1-D FFT benchmark with a vector size of 2^12
+The following will run the 1-D FFT benchmark with a vector size of 2^12. __NOTE__: FFT for the LACore was broken by some recent changes, and needs to be fixed, so the following command will fail!
     
     SCRATCH_SIZE=16 spike --extension=la_core pk out/dfft_la_core_sweep --log_size=12 --scratch_size=16
     
@@ -126,27 +137,31 @@ You'll most likely want to use the `MinorLACoreCPU` model. In order to run these
 - configs/la_core/full_timing_la_core.py
 - configs/la_core/minor_la_core.py
 
-To run the HPCC benchmarks and DTRSM on the pipelined LACore model in gem5, with the same workload arguments as above, use the following command lines:
+To run the HPCC benchmarks and DTRSM on the pipelined LACore model in gem5, with the same workload arguments as above, use the following command lines. __NOTE__: FFT for the LACore was broken by some recent changes, and needs to be fixed, so the following FFT command will fail!
 
-    /build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dgemm_la_core_sweep --size=64 --bs=64 --scratch_size=16"
+    ./build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dgemm_la_core_sweep --size=64 --bs=64 --scratch_size=16"
     
-    /build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dstream_la_core_sweep --size=12 --scratch_size=16"
+    ./build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dstream_la_core_sweep --size=12 --scratch_size=16"
     
-    /build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dfft_la_core_sweep --log_size=12 --scratch_size=16"
+    ./build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dfft_la_core_sweep --log_size=12 --scratch_size=16"
     
-    /build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/drandom_access_la_core_sweep --log_size=16"
+    ./build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/drandom_access_la_core_sweep --log_size=16"
     
-    /build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dlu_solve_la_core_sweep --log_size=6 --scratch_size=16"
+    ./build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dlu_solve_la_core_sweep --log_size=6 --scratch_size=16"
     
-    /build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/ptrans_la_core_sweep --log_size=6 --scratch_size=16"
+    ./build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/ptrans_la_core_sweep --log_size=6 --scratch_size=16"
     
-    /build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dtrsm_la_core_sweep --size=64 --scratch_size=16"
+    ./build/RISCV_LA_CORE/gem5.opt ./configs/la_core/minor_la_core.py --cmd="../linalg-benchmarks/benchmarks/out/dtrsm_la_core_sweep --size=64 --scratch_size=16"
     
 If everything is passing, you have successfully installed the full LACore development environment, congratulations. You can now start writing your own benchmarks and programs and running them on spike and gem5 using the same workflow described here.
 
 # Building x86 HPCC benchmarks
 
-The HPCC benchmarks have also been written for the x86 superscalar platform. to build these, you need to install GSL and FFTW3 using `apt-get` or your package manager. Then, change directories into `linalg-benchmarks/benchmarks` and run the following command:
+The HPCC benchmarks have also been written for the x86 superscalar platform. to build these, you need to install GSL and FFTW3 using `apt-get` or your package manager:
+
+    sudo apt-get install libfftw3-dev libgsl-dev
+
+Then, change directories into `linalg-benchmarks/benchmarks` and run the following command:
 
     make dgemm_x86_sweep \
          dstream_x86_sweep \
