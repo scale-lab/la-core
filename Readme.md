@@ -121,7 +121,11 @@ The following will run the DTRSM kernel with a matrix size of 64x64
     
 ## Building LACore gem5 models
 
-If everything is working up to this point, we are ready to build gem5 and then run the HPCC benchmarks on the gem5 to get cycle-accurate results. First, you are required to read through [this tutorial](http://learning.gem5.org/book/part1/building.html) on setting up system for running gem5. Don't actually build anything, just make sure the packages are installed and environment variables are set correctly. Then, change directories into `gem5`. Then, run the following command:
+If everything is working up to this point, we are ready to build gem5 and then run the HPCC benchmarks on the gem5 to get cycle-accurate results. First, you are required to read through [this tutorial](http://learning.gem5.org/book/part1/building.html) on setting up system for running gem5. Don't actually build anything, just make sure the following packages are installed:
+
+    sudo apt-get install build-essential scons python-dev swig libprotobuf-dev python-protobuf protobuf-compiler libgoogle-perftools-dev
+
+Then, change directories into `gem5`. Then, run the following command:
 
     scons -j10 build/RISCV_LA_CORE/gem5.opt
     
