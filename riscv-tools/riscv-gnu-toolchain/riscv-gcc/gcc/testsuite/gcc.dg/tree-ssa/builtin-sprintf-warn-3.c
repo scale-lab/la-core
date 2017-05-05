@@ -4,6 +4,7 @@
    -O2 (-ftree-vrp) is necessary for the tests involving ranges to pass,
    otherwise -O1 is sufficient.
    { dg-do compile }
+   { dg-require-effective-target alloca }
    { dg-options "-O2 -Wformat -Wformat-overflow=1 -ftrack-macro-expansion=0" } */
 
 typedef __SIZE_TYPE__ size_t;
@@ -357,19 +358,19 @@ void test_too_large (char *d, int x, __builtin_va_list va)
 
   __builtin_snprintf (d, imax,    "%c", x);
   __builtin_snprintf (d, imax_p1, "%c", x);   /* { dg-warning "specified bound \[0-9\]+ exceeds .INT_MAX." "INT_MAX + 1" { target lp64 } } */
-  /* { dg-warning "specified bound \[0-9\]+ exceeds maximum object size" "INT_MAX + 1" { target { ilp32 } } .-1 } */
+  /* { dg-warning "specified bound \[0-9\]+ exceeds maximum object size" "INT_MAX + 1" { target { { avr-*-* } || ilp32 } } .-1 } */
 
   __builtin_vsnprintf (d, imax,    "%c", va);
   __builtin_vsnprintf (d, imax_p1, "%c", va);   /* { dg-warning "specified bound \[0-9\]+ exceeds .INT_MAX." "INT_MAX + 1" { target lp64 } } */
-  /* { dg-warning "specified bound \[0-9\]+ exceeds maximum object size" "INT_MAX + 1" { target { ilp32 } } .-1 } */
+  /* { dg-warning "specified bound \[0-9\]+ exceeds maximum object size" "INT_MAX + 1" { target { { avr-*-* } || ilp32 } } .-1 } */
 
   __builtin___snprintf_chk (d, imax,    0, imax,    "%c", x);
   __builtin___snprintf_chk (d, imax_p1, 0, imax_p1, "%c", x);   /* { dg-warning "specified bound \[0-9\]+ exceeds .INT_MAX." "INT_MAX + 1" { target lp64 } } */
-  /* { dg-warning "specified bound \[0-9\]+ exceeds maximum object size" "INT_MAX + 1" { target { ilp32 } } .-1 } */
+  /* { dg-warning "specified bound \[0-9\]+ exceeds maximum object size" "INT_MAX + 1" { target { { avr-*-* } || ilp32 } } .-1 } */
 
   __builtin___vsnprintf_chk (d, imax,    0, imax,    "%c", va);
   __builtin___vsnprintf_chk (d, imax_p1, 0, imax_p1, "%c", va);   /* { dg-warning "specified bound \[0-9\]+ exceeds .INT_MAX." "INT_MAX + 1" { target lp64 } } */
-  /* { dg-warning "specified bound \[0-9\]+ exceeds maximum object size" "INT_MAX + 1" { target { ilp32 } } .-1 } */
+  /* { dg-warning "specified bound \[0-9\]+ exceeds maximum object size" "INT_MAX + 1" { target { { avr-*-* } || ilp32 } } .-1 } */
 
   const size_t ptrmax = __PTRDIFF_MAX__;
   const size_t ptrmax_m1 = ptrmax - 1;

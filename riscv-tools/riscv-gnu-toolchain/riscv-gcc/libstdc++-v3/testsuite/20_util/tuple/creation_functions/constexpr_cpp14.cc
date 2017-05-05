@@ -1,5 +1,4 @@
-// { dg-options "-std=gnu++17" }
-// { dg-do compile }
+// { dg-do compile { target c++14 } }
 
 // Copyright (C) 2017 Free Software Foundation, Inc.
 //
@@ -18,27 +17,15 @@
 // with this library; see the file COPYING3.  If not see
 // <http://www.gnu.org/licenses/>.
 
-#include <optional>
-#include <type_traits>
+#include <tuple>
 
-struct MoveOnly
+// ignore, see LWG 2773 + LWG 2933.
+constexpr bool
+test_ignore()
 {
-  MoveOnly() = default;
-  MoveOnly(MoveOnly&&) {}
-  MoveOnly& operator=(MoveOnly&&) {}
-};
-
-int main()
-{
-    std::optional x = 5;
-    static_assert(std::is_same_v<decltype(x), std::optional<int>>);
-    int y = 42;
-    std::optional x2 = y;
-    static_assert(std::is_same_v<decltype(x2), std::optional<int>>);
-    const int z = 666;
-    std::optional x3 = z;
-    static_assert(std::is_same_v<decltype(x3), std::optional<int>>);
-    std::optional mo = MoveOnly();
-    static_assert(std::is_same_v<decltype(mo), std::optional<MoveOnly>>);
-    mo = MoveOnly();
+  auto res = std::tie(std::ignore);
+  std::get<0>(res) = 42;
+  return true;
 }
+
+static_assert(test_ignore(), "test_ignore failure");
