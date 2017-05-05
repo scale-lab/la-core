@@ -2,11 +2,9 @@
 *.patch
 *.orig
 *.rej
-
 *~
 .#*
 *#
-
 *.flt
 *.gmo
 *.info
@@ -16,10 +14,8 @@
 *.pyc
 *.tmp
 *.a
-
 .deps
 .libs
-
 autom4te.cache
 config.cache
 config.h
@@ -29,35 +25,25 @@ config.status
 libtool
 POTFILES
 *-POTFILES
-
 TAGS
 TAGS.sub
-
 .local.vimrc
 .lvimrc
-
 .clang-format
-
 .gdbinit
 .gdb_history
-
 # ignore core files, but not java/net/protocol/core/
 core
 !core/
-
 lost+found
-
 # ignore ./contrib/gcc_update output
 LAST_UPDATED
 REVISION
-
 stamp-*
 *.stamp
-
 # ignore in-tree prerequisites
 /mpfr*
 /mpc*
 /gmp*
 /isl*
-
 build/
