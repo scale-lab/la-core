@@ -191,17 +191,17 @@ Now we want to build the gem5 x86 superscalar model and run the x86 HPCC benchma
     
 This will build the x86 models for you. Again, change `j10` to something that makes sense for your machine. After this finishes, you can run the HPCC benchmarks using the X86 configuration file located in `gem5/configs/la_core/x86_O3`. For example, here are the gem5 command lines for the above x86 HPCC benchmarks that were run on your real machine:
 
-    ./build/X86/gem5.opt ./configs/la_core/x86_O3 --cmd="../linalg-benchmarks/benchmarks/out/dgemm_x86_sweep --size=64 --bs=64
+    ./build/X86/gem5.opt ./configs/la_core/x86_O3.py --cmd="../linalg-benchmarks/benchmarks/out/dgemm_x86_sweep --size=64 --bs=64"
     
-    ./build/X86/gem5.opt ./configs/la_core/x86_O3 --cmd="../linalg-benchmarks/benchmarks/out/dstream_x86_sweep --size=4096
+    ./build/X86/gem5.opt ./configs/la_core/x86_O3.py --cmd="../linalg-benchmarks/benchmarks/out/dstream_x86_sweep --size=4096"
    
-    ./build/X86/gem5.opt ./configs/la_core/x86_O3 --cmd="../linalg-benchmarks/benchmarks/out/dfft_x86_sweep --log_size=12
+    ./build/X86/gem5.opt ./configs/la_core/x86_O3.py --cmd="../linalg-benchmarks/benchmarks/out/dfft_x86_sweep --log_size=12"
     
-    ./build/X86/gem5.opt ./configs/la_core/x86_O3 --cmd="../linalg-benchmarks/benchmarks/out/drandom_access_x86_sweep --log_size=12
+    ./build/X86/gem5.opt ./configs/la_core/x86_O3.py --cmd="../linalg-benchmarks/benchmarks/out/drandom_access_x86_sweep --log_size=12"
     
-    ./build/X86/gem5.opt ./configs/la_core/x86_O3 --cmd="../linalg-benchmarks/benchmarks/out/dlu_solve_x86_sweep --log_size=6
+    ./build/X86/gem5.opt ./configs/la_core/x86_O3.py --cmd="../linalg-benchmarks/benchmarks/out/dlu_solve_x86_sweep --log_size=6"
     
-    ./build/X86/gem5.opt ./configs/la_core/x86_O3 --cmd="../linalg-benchmarks/benchmarks/out/ptrans_x86_sweep --log_size=6
+    ./build/X86/gem5.opt ./configs/la_core/x86_O3.py --cmd="../linalg-benchmarks/benchmarks/out/ptrans_x86_sweep --log_size=6"
     
 If all of these work, you have successfully built and run the x86 benchmarks in gem5.
 
