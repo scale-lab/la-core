@@ -1,5 +1,7 @@
 # LACore Master Repository
 
+For citation, please cite: S. Steffl and S. Reda, "LACore: A Supercomputing-Like Linear Algebra Accelerator for SoC-Based Designs,"  in IEEE Conference on Computer Design, 2017
+
 LACore source is organized into the following:
 
 - __linalg-benchmarks__: contains the LACoreAPI framework, the HPCC benchmarks for LACore, x86, RISC-V and CUDA
